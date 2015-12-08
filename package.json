@@ -1,0 +1,27 @@
+{
+  "name": "clockworksms_dashlet",
+  "version": "0.1.0",
+  "description": "Dashlet to send SMS messages leveraging the Clockwork SMS API",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hectorrios/clockworksms_dashlet.git"
+  },
+  "keywords": [
+    "dashlet",
+    "sugarcrm"
+  ],
+  "author": "Hector Rios",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hectorrios/clockworksms_dashlet/issues"
+  },
+  "homepage": "https://github.com/hectorrios/clockworksms_dashlet#readme",
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-contrib-jshint": "^0.11.3"
+  }
+}
