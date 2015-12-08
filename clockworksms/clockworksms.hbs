@@ -1,0 +1,25 @@
+<br>
+<div class="span10 offset1">
+    <div class="row-fluid">
+        <div class="span11">
+            <input size="40" type="text" id="sms-to" placeholder="{{str 'LBL_SMS_TO_PLACEHOLDER'}}">
+            <span class="help-block">Format should be 2 digit country code followed by number</span>
+        </div>
+    </div>
+
+    <div class="row-fluid"></div>
+
+    <div class="row-fluid">
+        <div class="span11">
+            <textarea rows="4" id="sms-message" placeholder="{{str 'LBL_SMS_MESSAGE_PLACEHOLDER'}}"></textarea>
+        </div>
+    </div>
+
+    <br>
+
+    <div class="row-fluid">
+        <div class="span11">
+            <button class="btn btn-large btn-primary" data-action="send">{{str 'LBL_SMS_SEND_BUTTON'}}</button>
+        </div>
+    </div>
+</div>
