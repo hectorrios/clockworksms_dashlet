@@ -10,7 +10,7 @@ $manifest = array (
     'acceptable_sugar_versions' =>
         array(
             'regex_matches' => array(
-                '7\\.[0-9]\\.[0-9]$'
+                '7\\.[0-9]\\.[0-9]\\.[0-9]$'
             ),
         ),
 

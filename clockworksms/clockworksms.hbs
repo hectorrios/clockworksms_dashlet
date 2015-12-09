@@ -1,9 +1,14 @@
 <br>
-<div class="span10 offset1">
+<div class="span10">
     <div class="row-fluid">
         <div class="span11">
             <input size="40" type="text" id="sms-to" placeholder="{{str 'LBL_SMS_TO_PLACEHOLDER'}}">
-            <span class="help-block">Format should be 2 digit country code followed by number</span>
+        </div>
+    </div>
+
+    <div class="row-fluid">
+        <div class="span11">
+            <span class="help-block">{{str 'LBL_SMS_TO_TOOLTIP'}}</span>
         </div>
     </div>
 
@@ -19,7 +24,7 @@
 
     <div class="row-fluid">
         <div class="span11">
-            <button class="btn btn-large btn-primary" data-action="send">{{str 'LBL_SMS_SEND_BUTTON'}}</button>
+            <button class="btn btn-primary" data-action="send">{{str 'LBL_SMS_SEND_BUTTON'}}</button>
         </div>
     </div>
 </div>
