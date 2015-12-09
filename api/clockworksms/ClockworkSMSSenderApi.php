@@ -36,6 +36,7 @@ class ClockworkSMSSenderApi extends SugarApi {
             $api_key = $args['api_key'];
 
             $sms_body =  $args['message'];
+            $from_name = isset($args['from_name']) ? $args['from_name'] : 'SugarCRM';
 
             $GLOBALS['log']->fatal("The value of api_key is: $api_key");
 
@@ -43,13 +44,11 @@ class ClockworkSMSSenderApi extends SugarApi {
             $message = array(
                 'to' => $args['to_number'],
                 'message' => $sms_body,
+                'from' => $from_name,
             );
 
             $result = $clockwork->send($message);
 
-            $fromName = $args['from_fname'];
-//            return "The to number is: " . $args['to_number'] . " and the " .
-//            " from name is: $fromName " ;
             return $result;
 
         } catch (ClockworkException $e) {
