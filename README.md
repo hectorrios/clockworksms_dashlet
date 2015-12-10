@@ -5,7 +5,7 @@ Clockwork SMS Dashlet
 
 
 Clockwork is an enterprise SMS service that provides an API for sending SMS.
-This Dashlet leverages the PHP wrapper (included) to communicate with the API.
+This Dashlet leverages their PHP wrapper (included) to communicate with the API.
 
 Pre-requisite
 -------------
