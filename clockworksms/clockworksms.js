@@ -4,7 +4,6 @@
 (function() {
 
     var clearFields = function(dashlet) {
-        debugger;
         dashlet.$el.find('#sms-from').val('');
         dashlet.$el.find('#sms-to').val('');
         dashlet.$el.find('#sms-message').val('');
@@ -25,7 +24,6 @@
         apiKeyPresent: true,
 
         initDashlet: function (viewName) {
-            debugger;
             if(this.meta.config) {
                 //var api_key = this.settings.get("api_key") || "not_set";
                 //this.settings.set("api_key", api_key);
@@ -40,7 +38,6 @@
                 this.apiKey = (this.apiKey && this.apiKey.trim().length === 0) ? 'not_set' : this.apiKey;
 
                 if (this.apiKey === 'not_set') {
-                    debugger;
                     app.alert.show('missing_api_key', {
                         level: 'error',
                         messages: 'The API Key was not set on the settings page',
@@ -53,7 +50,6 @@
 
         initialize: function (options) {
             this._super('initialize', [options]);
-            debugger;
         },
 
         /*
@@ -61,7 +57,6 @@
          */
 
         sendSms: function () {
-            debugger;
             //grab the form information
             var formInfo = getSmsFormInfo(this);
             //var fromValue = this.$el.find('#sms-from').val();
@@ -88,7 +83,6 @@
                 from_name: formInfo.fromName
             }, {
                 success: function (data) {
-                    debugger;
 
                     data = data || {};
 
@@ -103,11 +97,10 @@
                     if (data.success === 0 && _.has(data,'error_code')) { //We have an error
                         app.alert.show('error_sending_sms', {
                             level: 'error',
-                            messages: data['error_message'],
+                            messages: data.error_message,
                             autoClose: false
                         });
                     } else { //It worked
-                        debugger;
                         clearFields(self);
                     }
 
@@ -115,7 +108,6 @@
                 },
 
                 error: function(result) {
-                    debugger;
                     console.log('The result is: ', result);
                 }
             });
@@ -130,7 +122,6 @@
             if (!this.createMode && !isPreview) {
                 console.log('I am getting called the second time');
             }
-            debugger;
             //check the settings object.
             //check the options param, what is in there?
         }
