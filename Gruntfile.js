@@ -32,4 +32,5 @@ module.exports = function (grunt) {
 
     //Tasks
     grunt.registerTask('default', ['jshint']);
+    grunt.registerTask('build', ['zip:long-format']);
 };
