@@ -39,6 +39,16 @@ $installdefs = array (
     'copy' =>
         array (
             array (
+                'from' => '<basepath>/jsgroupings/JQuery_BlockUI.jsgroups.php',
+                'to' => 'custom/Extension/application/Ext/JSGroupings/JQuery_BlockUI.jsgroups.php',
+            ),
+
+            array (
+                'from' => '<basepath>/jsgroupings/blockUI/jquery.blockUI.js',
+                'to' => 'custom/BlockUI/jquery.blockUI.js',
+            ),
+
+            array (
                 'from' => '<basepath>/clockworksms/',
                 'to' => 'custom/clients/base/views/clockworksms',
             ),

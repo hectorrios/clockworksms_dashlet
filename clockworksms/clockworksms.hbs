@@ -1,8 +1,17 @@
 <br>
 <div class="span10">
+
     <div class="row-fluid">
         <div class="span11">
-            <input size="40" type="text" id="sms-to" placeholder="{{str 'LBL_SMS_TO_PLACEHOLDER'}}">
+            <textarea rows="4" id="sms-message" placeholder="{{str 'LBL_SMS_MESSAGE_PLACEHOLDER'}}"></textarea>
+        </div>
+    </div>
+
+    <br>
+
+    <div class="row-fluid">
+        <div class="span11">
+            <input class="input-large" type="text" id="sms-to" placeholder="{{str 'LBL_SMS_TO_PLACEHOLDER'}}">
         </div>
     </div>
 
@@ -12,17 +21,9 @@
         </div>
     </div>
 
-    <div class="row-fluid"></div>
-
     <div class="row-fluid">
         <div class="span11">
-            <textarea rows="4" id="sms-message" placeholder="{{str 'LBL_SMS_MESSAGE_PLACEHOLDER'}}"></textarea>
-        </div>
-    </div>
-
-    <div class="row-fluid">
-        <div class="span11">
-            <input class="input-large" type="text" id="sms-from" placeholder="{{str 'LBL_SMS_FROM_PLACEHOLDER'}}">
+            <input class="input-medium" type="text" id="sms-from" placeholder="{{str 'LBL_SMS_FROM_PLACEHOLDER'}}">
         </div>
     </div>
 
@@ -30,7 +31,8 @@
 
     <div class="row-fluid">
         <div class="span3 offset5">
-            <button class="btn btn-small btn-primary pull-right" data-action="send">{{str 'LBL_SMS_SEND_BUTTON'}}</button>
+            <button type="button" class="btn btn-small btn-primary pull-right"
+                    data-action="send">{{str 'LBL_SMS_SEND_BUTTON'}}</button>
         </div>
     </div>
 

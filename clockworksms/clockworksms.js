@@ -4,6 +4,7 @@
 (function() {
 
     var clearFields = function(dashlet) {
+
         dashlet.$el.find('#sms-from').val('');
         dashlet.$el.find('#sms-to').val('');
         dashlet.$el.find('#sms-message').val('');
@@ -15,15 +16,27 @@
 
         className: 'row-fluid',
 
+        id: 'clockworkDashlet',
+
         events: {
             'click [data-action="send"]': 'sendSms'
         },
 
+        /*
+         Dashlet properties
+         */
         apiKey: undefined,
 
         apiKeyPresent: true,
 
+        blockUIEnabled: false,
+
+        /*
+         Initialization
+         */
+
         initDashlet: function (viewName) {
+
             if(this.meta.config) {
                 //var api_key = this.settings.get("api_key") || "not_set";
                 //this.settings.set("api_key", api_key);
@@ -38,6 +51,7 @@
                 this.apiKey = (this.apiKey && this.apiKey.trim().length === 0) ? 'not_set' : this.apiKey;
 
                 if (this.apiKey === 'not_set') {
+
                     app.alert.show('missing_api_key', {
                         level: 'error',
                         messages: 'The API Key was not set on the settings page',
@@ -50,6 +64,14 @@
 
         initialize: function (options) {
             this._super('initialize', [options]);
+
+            if ($ && $.blockUI) {
+                this.blockUIEnabled = true;
+            } else {
+                this.blockUIEnabled = false;
+            }
+
+
         },
 
         /*
@@ -57,6 +79,7 @@
          */
 
         sendSms: function () {
+
             //grab the form information
             var formInfo = getSmsFormInfo(this);
             //var fromValue = this.$el.find('#sms-from').val();
@@ -84,6 +107,11 @@
             }, {
                 success: function (data) {
 
+
+                    if (self.blockUIEnabled) {
+                        $('#clockworkDashlet').unblock();
+                    }
+
                     data = data || {};
 
                     if (data === 'Invalid API Key') {
@@ -101,6 +129,7 @@
                             autoClose: false
                         });
                     } else { //It worked
+
                         clearFields(self);
                     }
 
@@ -108,9 +137,17 @@
                 },
 
                 error: function(result) {
+
+                    if (self.blockUIEnabled) {
+                        $('#clockworkDashlet').unblock();
+                    }
                     console.log('The result is: ', result);
                 }
             });
+
+            if (this.blockUIEnabled) {
+                $('#clockworkDashlet').block({ message: '<h1>Sending...</h1>' });
+            }
 
         },
 
@@ -122,6 +159,7 @@
             if (!this.createMode && !isPreview) {
                 console.log('I am getting called the second time');
             }
+
             //check the settings object.
             //check the options param, what is in there?
         }

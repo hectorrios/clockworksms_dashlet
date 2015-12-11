@@ -16,6 +16,7 @@ module.exports = function (grunt) {
                     'api/**/*.*',
                     'clockworksms/*.*',
                     'language/**/*.*',
+                    'jsgroupings/**/*.*',
                     'manifest.php',
                     'README.txt'
                 ],
