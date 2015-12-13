@@ -60,29 +60,29 @@ $installdefs = array (
                 'to' => 'modules/CS_ClockworkSMS',
             ),
             array (
-                'from' => '<basepath>/jsgroupings/JQuery_BlockUI.jsgroups.php',
+                'from' => '<basepath>/custom/jsgroupings/JQuery_BlockUI.jsgroups.php',
                 'to' => 'custom/Extension/application/Ext/JSGroupings/JQuery_BlockUI.jsgroups.php',
             ),
 
             array (
-                'from' => '<basepath>/jsgroupings/blockUI/jquery.blockUI.js',
+                'from' => '<basepath>/custom/jsgroupings/blockUI/jquery.blockUI.js',
                 'to' => 'custom/BlockUI/jquery.blockUI.js',
             ),
 
             array (
-                'from' => '<basepath>/clockworksms/',
+                'from' => '<basepath>/custom/clockworksms/',
                 'to' => 'custom/clients/base/views/clockworksms',
             ),
             array (
-                'from' => '<basepath>/api/clockworksms/class-Clockwork.php',
+                'from' => '<basepath>/custom/api/clockworksms/class-Clockwork.php',
                 'to' => 'custom/clients/base/api/class-Clockwork.php',
             ),
             array (
-                'from' => '<basepath>/api/clockworksms/class-ClockworkException.php',
+                'from' => '<basepath>/custom/api/clockworksms/class-ClockworkException.php',
                 'to' => 'custom/clients/base/api/class-ClockworkException.php',
             ),
             array (
-                'from' => '<basepath>/api/clockworksms/ClockworkSMSSenderApi.php',
+                'from' => '<basepath>/custom/api/clockworksms/ClockworkSMSSenderApi.php',
                 'to' => 'custom/clients/base/api/ClockworkSMSSenderApi.php',
             ),
         ),
@@ -94,7 +94,7 @@ $installdefs = array (
                 'language' => 'en_us',
             ),
             array (
-                'from' => '<basepath>/language/clockworksms/en_us.clockworksms.php',
+                'from' => '<basepath>/custom/language/clockworksms/en_us.clockworksms.php',
                 'to_module' => 'application',
                 'language' => 'en_us',
             ),
