@@ -36,8 +36,29 @@ $manifest = array (
 
 $installdefs = array (
     'id' => 'ClockworkSMS_001',
+    'beans' =>
+        array (
+            0 =>
+                array (
+                    'module' => 'CS_ClockworkSMS',
+                    'class' => 'CS_ClockworkSMS',
+                    'path' => 'modules/CS_ClockworkSMS/CS_ClockworkSMS.php',
+                    'tab' => false,
+                ),
+        ),
+    'layoutdefs' =>
+        array (
+        ),
+    'relationships' =>
+        array (
+        ),
+    'image_dir' => '<basepath>/modules/icons',
     'copy' =>
         array (
+            array (
+                'from' => '<basepath>/modules/SugarModules/modules/CS_ClockworkSMS',
+                'to' => 'modules/CS_ClockworkSMS',
+            ),
             array (
                 'from' => '<basepath>/jsgroupings/JQuery_BlockUI.jsgroups.php',
                 'to' => 'custom/Extension/application/Ext/JSGroupings/JQuery_BlockUI.jsgroups.php',
@@ -67,6 +88,11 @@ $installdefs = array (
         ),
     'language' =>
         array (
+            array (
+                'from' => '<basepath>/modules/SugarModules/language/application/en_us.lang.php',
+                'to_module' => 'application',
+                'language' => 'en_us',
+            ),
             array (
                 'from' => '<basepath>/language/clockworksms/en_us.clockworksms.php',
                 'to_module' => 'application',
