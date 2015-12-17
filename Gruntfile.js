@@ -6,18 +6,19 @@ module.exports = function (grunt) {
         jshint: {
             all: [
                 'Gruntfile.js',
-                'clockworksms/*.js'
+                'custom/clockworksms/*.js',
+                'custom/Extension/**/*.js',
+                'modules/**/*.js'
             ]
         },
 
         zip: {
             'long-format': {
                 src: [
-                    'api/**/*.*',
-                    'clockworksms/*.*',
-                    'language/**/*.*',
-                    'jsgroupings/**/*.*',
+                    'custom/**/*.*',
+                    'modules/**/*.*',
                     'manifest.php',
+                    'LICENSE',
                     'README.txt'
                 ],
 

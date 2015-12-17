@@ -4,11 +4,13 @@
 (function() {
 
     var clearFields = function(dashlet) {
-
+        debugger;
         dashlet.$el.find('#sms-from').val('');
         dashlet.$el.find('#sms-to').val('');
         dashlet.$el.find('#sms-message').val('');
     };
+
+    var renderCount = 0;
 
     return {
         //This view uses the essential Dashlet plug-in
@@ -19,7 +21,8 @@
         id: 'clockworkDashlet',
 
         events: {
-            'click [data-action="send"]': 'sendSms'
+            'click [data-action="send"]': 'sendSms',
+            'click .phone-number' : 'useNumber'
         },
 
         /*
@@ -32,11 +35,22 @@
         blockUIEnabled: false,
 
         /*
+         Will be a hash with the name of the attribute
+         as the key and and the attribute value
+         */
+        phoneList: undefined,
+
+        /*
          Initialization
          */
 
+        /**
+         * @inheritDoc
+         *
+         * @param {string} viewName
+         */
         initDashlet: function (viewName) {
-
+            debugger;
             if(this.meta.config) {
                 //var api_key = this.settings.get("api_key") || "not_set";
                 //this.settings.set("api_key", api_key);
@@ -46,32 +60,73 @@
 
             if (!this.createMode && this.settings && !isPreview) {
 
-                this.apiKey = this.settings.get('api_key') || 'not_set';
-
-                this.apiKey = (this.apiKey && this.apiKey.trim().length === 0) ? 'not_set' : this.apiKey;
-
-                if (this.apiKey === 'not_set') {
-
-                    app.alert.show('missing_api_key', {
-                        level: 'error',
-                        messages: 'The API Key was not set on the settings page',
-                        autoClose: false
-                    });
-                    this.apiKeyPresent = false;
-                }
+                console.log('We are no longer using the dashlet configuration page');
+                //this.apiKey = this.settings.get('api_key') || 'not_set';
+                //
+                //this.apiKey = (this.apiKey && this.apiKey.trim().length === 0) ? 'not_set' : this.apiKey;
+                //
+                //if (this.apiKey === 'not_set') {
+                //    debugger;
+                //    app.alert.show('missing_api_key', {
+                //        level: 'error',
+                //        messages: 'The API Key was not set on the settings page',
+                //        autoClose: false
+                //    });
+                //    this.apiKeyPresent = false;
+                //}
             }
         },
 
+        /**
+         * @inheritDoc
+         *
+         * @param {options hash} options
+         */
         initialize: function (options) {
             this._super('initialize', [options]);
 
-            if ($ && $.blockUI) {
-                this.blockUIEnabled = true;
-            } else {
-                this.blockUIEnabled = false;
+            this.blockUIEnabled = ($ && $.blockUI);
+
+            this.listenTo(this.model, 'change', this.render);
+
+            debugger;
+        },
+
+        /**
+         * @inheritDoc
+         *
+         * @returns {View Controller} the pointer to "this" for chaining.
+         */
+        render: function () {
+
+            console.log('Render function. The render call count is: ',
+                ++renderCount);
+
+            this.phoneNumbers();
+
+            //chain up
+            this._super('render');
+
+            return this;
+        },
+
+        /**
+         * @inheritDoc
+         *
+         * @param {Object} options
+         */
+        loadData: function (options) {
+            //TODO Do we still need this function?
+            this._super('loadData', [options]);
+
+            var isPreview = this.meta.preview ? this.meta.preview : false;
+
+            if (!this.createMode && !isPreview) {
+                console.log('I am getting called the second time');
             }
-
-
+            debugger;
+            //check the settings object.
+            //check the options param, what is in there?
         },
 
         /*
@@ -79,7 +134,7 @@
          */
 
         sendSms: function () {
-
+            debugger;
             //grab the form information
             var formInfo = getSmsFormInfo(this);
             //var fromValue = this.$el.find('#sms-from').val();
@@ -101,12 +156,11 @@
 
             app.api.call('create', restURL, {
                 to_number: formInfo.toNumber,
-                api_key: this.apiKey,
                 message: formInfo.message,
                 from_name: formInfo.fromName
             }, {
                 success: function (data) {
-
+                    debugger;
 
                     if (self.blockUIEnabled) {
                         $('#clockworkDashlet').unblock();
@@ -129,7 +183,7 @@
                             autoClose: false
                         });
                     } else { //It worked
-
+                        debugger;
                         clearFields(self);
                     }
 
@@ -137,7 +191,7 @@
                 },
 
                 error: function(result) {
-
+                    debugger;
                     if (self.blockUIEnabled) {
                         $('#clockworkDashlet').unblock();
                     }
@@ -151,21 +205,37 @@
 
         },
 
-        loadData: function (options) {
-            this._super('loadData', [options]);
+        /**
+         * Will take the value and put it in the textbox
+         */
+        useNumber: function (event) {
+            event.preventDefault();
+            debugger;
+            var $phoneNumber = $(event.toElement);
+            this.$('#sms-to').val($phoneNumber.text());
+        },
 
-            var isPreview = this.meta.preview ? this.meta.preview : false;
 
-            if (!this.createMode && !isPreview) {
-                console.log('I am getting called the second time');
-            }
 
-            //check the settings object.
-            //check the options param, what is in there?
+        phoneNumbers: function () {
+            debugger;
+            _.each(this.model.fields, function (element) {
+                this.phoneList = this.phoneList || {};
+                if (typeof element === 'object') {
+                    //If the type is 'phone' and it has a value
+                    if (element.type === 'phone' && this.model.get(element.name)) {
+                        this.phoneList[element.name] =
+                            this.model.get(element.name);
+                    }
+                }
+            }, this);
         }
 
     };
 
+    /*
+     Private functions
+     */
     function getSmsFormInfo (dashlet) {
 
         var formInfo = {};

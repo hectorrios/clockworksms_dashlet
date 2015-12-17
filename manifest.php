@@ -85,6 +85,11 @@ $installdefs = array (
                 'from' => '<basepath>/custom/api/clockworksms/ClockworkSMSSenderApi.php',
                 'to' => 'custom/clients/base/api/ClockworkSMSSenderApi.php',
             ),
+
+            array (
+                'from' => '<basepath>/custom/Extension/modules/Administration',
+                'to' => 'custom/Extension/modules/Administration',
+            ),
         ),
     'language' =>
         array (
@@ -94,7 +99,7 @@ $installdefs = array (
                 'language' => 'en_us',
             ),
             array (
-                'from' => '<basepath>/custom/language/clockworksms/en_us.clockworksms.php',
+                'from' => '<basepath>/custom/language/clockworksms/en_us.clockworksms_dashlet_heckie.php',
                 'to_module' => 'application',
                 'language' => 'en_us',
             ),

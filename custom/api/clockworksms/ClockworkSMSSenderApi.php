@@ -1,6 +1,7 @@
 <?php
 
 require_once 'custom/clients/base/api/class-Clockwork.php';
+require_once 'modules/Configurator/Configurator.php';
 
 /**
  * Created by PhpStorm.
@@ -20,6 +21,24 @@ class ClockworkSMSSenderApi extends SugarApi {
                 'shortHelp' => 'Sends an SMS using the Clockwork API',
                 'longHelp' => '',
             ),
+
+            'store_api_key' => array(
+                'reqType' => 'POST',
+                'path' => array('ClockworkSMS', 'apikey'),
+                'pathVars' => array('', ''),
+                'method' => 'store_api_key',
+                'shortHelp' => 'Save a ClockworkSMS api key instance wide',
+                'longHelp' => '',
+            ),
+
+            'get_api_key' => array(
+                'reqType' => 'GET',
+                'path' => array('ClockworkSMS', 'getapikey'),
+                'pathVars' => array('', ''),
+                'method' => 'get_api_key',
+                'shortHelp' => 'Retrieve the stored ClockworkSMS API key',
+                'longHelp' => '',
+            ),
         );
     }
 
@@ -33,7 +52,7 @@ class ClockworkSMSSenderApi extends SugarApi {
                 return $error_array;
             }
 
-            $api_key = $args['api_key'];
+            $api_key = $this->getApiKeyFromConfig();
 
             $sms_body =  $args['message'];
             $from_name = isset($args['from_name']) ? $args['from_name'] : 'SugarCRM';
@@ -55,14 +74,65 @@ class ClockworkSMSSenderApi extends SugarApi {
 //            $GLOBALS['log']->fatal("$e->getMessage()");
             return $e->getMessage();
         }
-
-
-
     }
+
+    public function store_api_key($api, $args) {
+        if (!isset($args['api_key'])) {
+            return array(
+                'success' => 0,
+                'error_code' => '200',
+                'error_message' => 'No API Key was sent.',
+            );
+        }
+
+        $api_key = $args['api_key'];
+
+        $configuratorObj = new Configurator();
+
+        //Load config
+        $configuratorObj->loadConfig();
+
+        //Update the API setting
+        $configuratorObj->config['ClockworkSMSApiKey'] = $api_key;
+
+        //Save the new setting
+        $configuratorObj->saveConfig();
+
+        return array(
+            'success' => 1,
+        );
+    }
+
+    public function get_api_key($api, $args) {
+
+        $apiKey = $this->getApiKeyFromConfig();
+
+        if (isset($apiKey)) {
+            return array(
+                'success' => 1,
+                'payload' => array(
+                    'clockwork_sms_api_key' => $apiKey,
+                ),
+            );
+        } else {
+            return array(
+                'success' => 0,
+                'error_code' => '205',
+                'error_message' => 'There is no currently stored API key. It needs ' .
+                    'to be configured',
+
+            );
+        }
+    }
+
+    /*
+     * Private methods
+     */
 
     private function validate_args($args) {
 
-        if(!isset($args['api_key'])) {
+        $api_key = $this->getApiKeyFromConfig();
+        if(!isset($api_key)) {
             return array(
                 'success' => 0,
                 'error_code'=> '100',
@@ -88,7 +158,7 @@ class ClockworkSMSSenderApi extends SugarApi {
 
         //We checked that the args have been set. Now lets make sure that
         //they are not blank.
-        $api_key = $args['api_key'];
+        //$api_key = $args['api_key'];
 
         $sms_body =  $args['message'];
 
@@ -119,6 +189,17 @@ class ClockworkSMSSenderApi extends SugarApi {
                 'error_code'=> '101',
                 'error_message' => 'The to number can not be blank.',
             );
+        }
+    }
+
+    private function getApiKeyFromConfig() {
+        global $sugar_config;
+
+        //Fetch the API setting
+        if (isset($sugar_config['ClockworkSMSApiKey'])) {
+            return $sugar_config['ClockworkSMSApiKey'];
+        } else {
+            return null;
         }
     }
 }
