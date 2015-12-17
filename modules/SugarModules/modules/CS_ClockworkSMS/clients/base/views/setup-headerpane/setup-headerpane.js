@@ -34,7 +34,7 @@
                 api_key:  apiKey
             },{
                 success: function (data) {
-                    debugger;
+
                     self.model.trigger('end_save_clockworksms_api_key',
                         self.blockUIEnabled);
 
@@ -56,7 +56,7 @@
                 },
 
                 error: function (result) {
-                    debugger;
+
                     self.model.trigger('end_save_clockworksms_api_key',
                         self.blockUIEnabled);
                     console.log('An error occurred trying to save the api key. The ' +

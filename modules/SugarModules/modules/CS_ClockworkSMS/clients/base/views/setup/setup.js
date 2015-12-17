@@ -23,18 +23,18 @@
 
             //Fetch the API KEY if it already exists and set the apiKey property
             this.fetchApiKey();
-            debugger;
+
         },
 
         render: function () {
-            debugger;
+
             this._super('render');
 
             return this;
         },
 
         remove: function () {
-            debugger;
+
             this._super('remove');
         },
 
@@ -61,7 +61,7 @@
                 },
 
                 error: function(result) {
-                    debugger;
+
                     console.log('Inside the ClockworkSMS error callback. The result ' +
                         'object is: ', result);
                     if (!self.disposed) {
