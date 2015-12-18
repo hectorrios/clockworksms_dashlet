@@ -22,24 +22,7 @@ $links['Administration']['link1'] = array(
     // where to send the user when the link is clicked
     'javascript:parent.SUGAR.App.router.navigate("CS_ClockworkSMS/layout/setup", {trigger: true});',
 );
-// add link2 to $links
-// this link uses labels instead of hard-coded strings
-// since this is in the scope of the Administration module,
-// you need to add these labels to the
-// Administration lang files in
-// /custom/Extension/modules/Administration/Ext/Language/abc_Module.php
-$links['Administration']['link2'] = array(
-    // pick an image from /themes/Sugar5/images
-    // and drop the file extension
-    'CallReports',
-    // defined in /custom/Extension/modules/Administration/Ext/Language/abc_Module.php
-    'LBL_LINK_NAME',
-    // defined in /custom/Extension/modules/Administration/Ext/Language/abc_Module.php
-    'LBL_LINK_DESCRIPTION',
-    // where to send the user when the link is clicked
-//    './index.php?module=abc_Module&action=link2_action',
-    'javascript:parent.SUGAR.App.router.navigate("CS_ClockworkSMS/create", {trigger: true});',
-);
+
 // add our new admin section to the main admin_group_header array
 $admin_group_header []= array(
     // The title for the group of links
