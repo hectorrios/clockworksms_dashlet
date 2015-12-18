@@ -57,14 +57,25 @@ each should provide version numbers.
  into the following directory: __C:\myhome\clockwork_dashlet__ then change into this
  directory and run the following command:
  
+> npm install
+
+This command installs all dev dependencies for the project. 
+
+Once dev dependencies are installed issue a:
+
 > grunt build
 
 You should output similar to the following:
 
+> Running "zip:long-format" (zip) task
+>
+> File "build/clockworksms.zip" created.
+>
+> Done, without errors.
 
 If the ouput looks Ok then you should find a new folder called __build__ that
 has been created and inside the folder you'll find a zip file which is the installable
-package.
+package. You can use module loader to load and install the package.
 
 Have fun.
 
