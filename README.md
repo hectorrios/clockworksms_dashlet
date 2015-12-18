@@ -16,9 +16,9 @@ for a key for free and if you link a mobile number then you'll get a
 50 pence (UK currency) credit. Each SMS costs about 5 pence.
 
 
-## Installation
+## Easy Installation
 
-There are 2 ways to install the dashlet: 
+This is the painless way of installing the dashlet into a Sugar instance 
 
 ### Download the installable package zip
 
@@ -26,6 +26,12 @@ If you're not interested in the code then
 you can download the prebuilt zip file which is ready to be installed with module loader.
 __Please be aware that the zip may not always be up to date with the code. The only way to
  have the latest and greatest is to clone the repo and build the installable package__
+
+## Ninja installation
+
+As with most things that are Ninja-like, this requires more steps and you'll
+need to install things like NodeJS and Grunt. If you're doing other development at the
+moment then you might already have these and so it becomes quite straight forward.
 
 ### Clone the Repo
 
