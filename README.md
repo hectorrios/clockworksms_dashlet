@@ -26,6 +26,11 @@ If you're not interested in the code then
 you can download the prebuilt zip file which is ready to be installed with module loader.
 __Please be aware that the zip may not always be up to date with the code. The only way to
  have the latest and greatest is to clone the repo and build the installable package__
+ 
+On the GitHub page for the repo you should see a tag with "release". Click on the link
+and you should see the release notes and a download link for __clockworksms.zip__
+
+Click the link and you should start the download of the installable package.
 
 ## Ninja installation
 
