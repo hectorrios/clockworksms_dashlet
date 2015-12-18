@@ -1,50 +1,59 @@
 <br>
-<div class="span4">
+<div class="row-fluid">
 
-    <ul>
-        {{#each phoneList}}
-            <li><a class="phone-number" href="">{{this}}</a></li>
-        {{/each}}
-    </ul>
-</div>
+    <div class="span4">
 
-<br>
-<div class="span8">
-
-    <div class="row-fluid">
-        <div class="span11">
-            <textarea rows="4" id="sms-message" placeholder="{{str 'LBL_SMS_MESSAGE_PLACEHOLDER'}}"></textarea>
-        </div>
+        <ul>
+            {{#each phoneList}}
+                <li>
+                    {{this}}
+                    <a class="phone-number" data-phone-number="{{this}}" href="">
+                        <i class=" fa fa-hand-o-right"></i>
+                    </a>
+                </li>
+            {{/each}}
+        </ul>
     </div>
 
-    <br>
+    <div class="span8">
 
-    <div class="row-fluid">
-        <div class="span11">
-            <input class="input-large" type="text" id="sms-to" placeholder="{{str 'LBL_SMS_TO_PLACEHOLDER'}}">
+        <div class="row-fluid">
+            <div class="span11">
+                <textarea rows="4" id="sms-message" placeholder="{{str 'LBL_SMS_MESSAGE_PLACEHOLDER'}}"></textarea>
+            </div>
         </div>
-    </div>
 
-    <div class="row-fluid">
-        <div class="span11">
-            <span class="help-block">{{str 'LBL_SMS_TO_TOOLTIP'}}</span>
+        <br>
+
+        <div class="row-fluid">
+            <div class="span11">
+                <input class="input-large" type="text" id="sms-to" placeholder="{{str 'LBL_SMS_TO_PLACEHOLDER'}}">
+            </div>
         </div>
-    </div>
 
-    <div class="row-fluid">
-        <div class="span11">
-            <input class="input-medium" type="text" id="sms-from" placeholder="{{str 'LBL_SMS_FROM_PLACEHOLDER'}}">
+        <div class="row-fluid">
+            <div class="span11">
+                <span class="help-block">{{str 'LBL_SMS_TO_TOOLTIP'}}</span>
+            </div>
         </div>
-    </div>
 
-    <br>
+        <br>
 
-    <div class="row-fluid">
-        <div class="span3 offset5">
-            <button type="button" class="btn btn-small btn-primary pull-right"
-                    data-action="send">{{str 'LBL_SMS_SEND_BUTTON'}}</button>
+        <div class="row-fluid">
+            <div class="span11">
+                <input class="input-medium" type="text" id="sms-from" placeholder="{{str 'LBL_SMS_FROM_PLACEHOLDER'}}">
+            </div>
         </div>
-    </div>
 
-    <br>
+        <br>
+
+        <div class="row-fluid">
+            <div class="span3 offset5">
+                <button type="button" class="btn btn-small btn-primary pull-right"
+                        data-action="send">{{str 'LBL_SMS_SEND_BUTTON'}}</button>
+            </div>
+        </div>
+
+        <br>
+    </div>
 </div>

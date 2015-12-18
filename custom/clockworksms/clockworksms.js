@@ -102,6 +102,11 @@
             console.log('Render function. The render call count is: ',
                 ++renderCount);
 
+            /*
+             sms-number-list-split-section
+             sms-form-split-section
+             */
+
             this.phoneNumbers();
 
             //chain up
@@ -211,11 +216,10 @@
         useNumber: function (event) {
             event.preventDefault();
 
+            //The element clicked should be an <i> tag
             var $phoneNumber = $(event.toElement);
-            this.$('#sms-to').val($phoneNumber.text());
+            this.$('#sms-to').val($phoneNumber.attr('data-phone-number'));
         },
-
-
 
         phoneNumbers: function () {
 
