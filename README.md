@@ -5,11 +5,13 @@
 A SMS sending Dashlet that can be used on the **record** views of the **Accounts** and 
 **Contacts** modules only.
 
+## What is Clockwork SMS
+
 Clockwork is an enterprise SMS service that provides an API for sending SMS.
 This Dashlet leverages their PHP wrapper (included) to communicate with the API to send
 out SMS messages.
 
-The Dashlet is enabled for the Accounts and Contacts record views.
+The Dashlet is enabled for the **Accounts** and **Contacts** record views.
 
 Pre-requisite
 -------------
