@@ -8,6 +8,13 @@
         dashlet.$el.find('#sms-from').val('');
         dashlet.$el.find('#sms-to').val('');
         dashlet.$el.find('#sms-message').val('');
+        dashlet.$el.find('#sms-to-another-number').val('');
+
+        //clear out the smsMessageObj object
+        dashlet.smsMessageObj.fromName = '';
+        dashlet.smsMessageObj.toNumber = '';
+        dashlet.smsMessageObj.message = '';
+
     };
 
     var renderCount = 0;
@@ -22,17 +29,26 @@
 
         events: {
             'click [data-action="send"]': 'sendSms',
-            'click .phone-number' : 'useNumber'
+            'click .phone-number' : 'useNumber',
+            'click #another-number': 'useAnotherNumber'
         },
 
         /*
          Dashlet properties
          */
-        apiKey: undefined,
+        debugMode: undefined,
 
         apiKeyPresent: true,
 
         blockUIEnabled: false,
+
+        useAnotherNumberFlag: false,
+
+        smsMessageObj: {
+            toNumber: '',
+            fromName: '',
+            message: ''
+        },
 
         /*
          Will be a hash with the name of the attribute
@@ -51,6 +67,14 @@
          */
         initDashlet: function (viewName) {
 
+            if (this.debugMode) {
+                console.log('Entering the initDashlet function');
+
+                if (viewName) {
+                    console.log('The viewName parameter is ', viewName);
+                }
+            }
+
             if(this.meta.config) {
                 //var api_key = this.settings.get("api_key") || "not_set";
                 //this.settings.set("api_key", api_key);
@@ -60,19 +84,16 @@
 
             if (!this.createMode && this.settings && !isPreview) {
 
-                console.log('We are no longer using the dashlet configuration page');
-                //this.apiKey = this.settings.get('api_key') || 'not_set';
-                //
-                //this.apiKey = (this.apiKey && this.apiKey.trim().length === 0) ? 'not_set' : this.apiKey;
-                //
-                //if (this.apiKey === 'not_set') {
-                //
-                //    app.alert.show('missing_api_key', {
+                //console.log('We are no longer using the dashlet configuration page');
+                this.debugMode = this.settings.get('debug_mode') || false;
+
+                //if (this.debugMode === 'not_set') {
+                //    debugger;
+                //    app.alert.show('missing_debug_mode', {
                 //        level: 'error',
-                //        messages: 'The API Key was not set on the settings page',
+                //        messages: 'The Debug Mode option was not set on the settings page',
                 //        autoClose: false
                 //    });
-                //    this.apiKeyPresent = false;
                 //}
             }
         },
@@ -83,13 +104,25 @@
          * @param {options hash} options
          */
         initialize: function (options) {
+
+            if (this.debugMode) {
+                console.log('Executing the initialize function');
+                console.log('Chaining up to the super initialize function');
+            }
+
             this._super('initialize', [options]);
+
+            if (this.debugMode && !($ && $.blockUI)) {
+                console.log('jQuery plugin BlockUI is NOT enabled');
+            }
 
             this.blockUIEnabled = ($ && $.blockUI);
 
             this.listenTo(this.model, 'change', this.render);
 
-
+            if (this.debugMode) {
+                console.log('Leaving the initialize function');
+            }
         },
 
         /**
@@ -98,19 +131,16 @@
          * @returns {View Controller} the pointer to "this" for chaining.
          */
         render: function () {
-
-            console.log('Render function. The render call count is: ',
-                ++renderCount);
-
-            /*
-             sms-number-list-split-section
-             sms-form-split-section
-             */
-
+            //create the list of available phone numbers from the model.
             this.phoneNumbers();
 
             //chain up
             this._super('render');
+
+            if (this.debugMode) {
+                console.log('Render function. The render call count is: ',
+                    ++renderCount);
+            }
 
             return this;
         },
@@ -129,7 +159,6 @@
             if (!this.createMode && !isPreview) {
                 console.log('I am getting called the second time');
             }
-
             //check the settings object.
             //check the options param, what is in there?
         },
@@ -140,14 +169,17 @@
 
         sendSms: function () {
 
+            if (this.debugMode) {
+                console.log('Executing the sendSms function');
+            }
+
             //grab the form information
             var formInfo = getSmsFormInfo(this);
-            //var fromValue = this.$el.find('#sms-from').val();
-            //
-            //console.log('The from value is: ', fromValue);
-            //
-            //var message = this.$('#sms-message').val();
-            //console.log('The message is: ', message);
+
+            //validate the SMS Message object
+            if (!this._validateSmsMessageObj()) {
+                return;
+            }
 
             var restURL = app.api.buildURL('ClockworkSMS/send');
 
@@ -165,7 +197,6 @@
                 from_name: formInfo.fromName
             }, {
                 success: function (data) {
-
 
                     if (self.blockUIEnabled) {
                         $('#clockworkDashlet').unblock();
@@ -188,7 +219,6 @@
                             autoClose: false
                         });
                     } else { //It worked
-
                         clearFields(self);
                     }
 
@@ -196,7 +226,6 @@
                 },
 
                 error: function(result) {
-
                     if (self.blockUIEnabled) {
                         $('#clockworkDashlet').unblock();
                     }
@@ -215,24 +244,114 @@
          */
         useNumber: function (event) {
             event.preventDefault();
-
-            //The element clicked should be an <i> tag
+            //Is the <i> tag. We need the parent
             var $phoneNumber = $(event.toElement);
             this.$('#sms-to').val($phoneNumber.attr('data-phone-number'));
         },
 
+
+        useAnotherNumber: function (event) {
+            if (this.debugMode) {
+                console.log('entering the useAnotherNumber function');
+            }
+
+            //Populate the smsMessageObj
+            getSmsFormInfo(this);
+
+            var checkbox = event.target;
+            if (this.debugMode) {
+                if (checkbox) {
+                    console.log('The target of the event has an element');
+                } else {
+                    console.log('Oh Oh, the target of the event does not have ' +
+                        'a element');
+                }
+            }
+
+            if (checkbox && checkbox.checked) {
+                if (this.debugMode) {
+                    console.log('setting the useAnotherNumberFlag to true');
+                }
+                //this.$('#sms-to').parents('.row-fluid').first().css('backgroundColor',
+                //        'red');
+
+                //Try and hide the combolist of numbers
+                //this.$('#sms-to').parents('.row-fluid').first().hide();
+
+                //set the use another number flag to true and trigger re-render
+                this.useAnotherNumberFlag = !this.useAnotherNumberFlag;
+            } else { //Checkbox not checked
+                if (this.debugMode) {
+                    console.log('setting the useAnotherNumberFlag to false');
+                }
+                //set the use another number flag to false and trigger re-render
+                this.useAnotherNumberFlag = !this.useAnotherNumberFlag;
+                this.$('#sms-to').parents('.row-fluid').first().css('backgroundColor',
+                    '');
+            }
+
+            //Trigger a re-render
+            if (this.debugMode) {
+                console.log('Triggering the render function');
+            }
+            this.render();
+
+            if (this.debugMode) {
+                console.log('Leaving the useAnotherNumber function');
+            }
+        },
+
         phoneNumbers: function () {
 
+            if (this.debugMode) {
+                var context = this.context;
+                console.log('Fetching the LBL_OFFICE_PHONE text');
+                console.log('using getAppString the value is: ',
+                    app.lang.getAppString('LBL_OFFICE_PHONE'));
+                console.log('Using getModString the value is: ',
+                    app.lang.getModString('LBL_OFFICE_PHONE', context.get('module')));
+            }
             _.each(this.model.fields, function (element) {
                 this.phoneList = this.phoneList || {};
                 if (typeof element === 'object') {
                     //If the type is 'phone' and it has a value
                     if (element.type === 'phone' && this.model.get(element.name)) {
-                        this.phoneList[element.name] =
+                        this.phoneList[element.vname] =
                             this.model.get(element.name);
                     }
                 }
             }, this);
+        },
+
+        /*
+         Private methods
+         */
+
+        _validateSmsMessageObj: function () {
+            var smsObj = this.smsMessageObj;
+            //Make sure we at have a toNumber and a message
+            if (!smsObj.toNumber || smsObj.toNumber === 'empty_val' ||
+                smsObj.toNumber.trim().length < 1) {
+                app.alert.show('to-number-invalid', {
+                    level: 'error',
+                    messages: 'The To Number must have a value.',
+                    autoClose: false
+                });
+
+                return false;
+            }
+
+            if (!smsObj.message || smsObj.message.trim().length < 1) {
+                app.alert.show('missing-sms-message', {
+                    level: 'error',
+                    messages: 'The message can not be blank.',
+                    autoClose: false
+                });
+
+                return false;
+            }
+
+            return true;
         }
 
     };
@@ -242,12 +361,34 @@
      */
     function getSmsFormInfo (dashlet) {
 
-        var formInfo = {};
+        var formInfo = dashlet.smsMessageObj;
 
         formInfo.message = dashlet.$('#sms-message').val();
-        console.log('The message is: ', formInfo.message);
 
-        formInfo.toNumber = dashlet.$el.find('#sms-to').val();
+        if (dashlet.debugMode) {
+            console.log('The message is: ', formInfo.message);
+        }
+
+        if (dashlet.debugMode && dashlet.useAnotherNumberFlag) {
+
+        }
+
+        if (dashlet.useAnotherNumberFlag) {
+            if (dashlet.debugMode) {
+                console.log('The useAnotherNumberFlag is enabled');
+                console.log('Fetching the toNumber from the #sms-to-another-number text box');
+            }
+
+            //Grab the to another number entry
+            formInfo.toNumber = dashlet.$('#sms-to-another-number').val().trim();
+
+        } else {
+            if (dashlet.debugMode) {
+                console.log('Selecting the value from the select box');
+            }
+            formInfo.toNumber = dashlet.$el.find('#sms-to').val();
+        }
+
 
         //grab the from information
         formInfo.fromName = dashlet.$el.find('#sms-from').val();

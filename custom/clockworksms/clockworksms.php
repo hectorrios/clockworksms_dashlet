@@ -39,10 +39,11 @@ $viewdefs['base']['view']['clockworksms'] = array(
     'config' => array (
         'fields' => array (
             array(
-                'name' => 'api_key',
+                'name' => 'debug_mode',
                 'css_class' => 'api_class',
-                'label' => 'LBL_CLOCKWORK_API_KEY',
-                'placeholder' => 'LBL_CLOCKWORK_API_PLACEHOLDER',
+                'label' => 'LBL_CLOCKWORKSMS_DEBUG_MODE',
+                'type' => 'bool',
+//                'placeholder' => 'LBL_CLOCKWORK_API_PLACEHOLDER',
             ),
         ),
     ),
