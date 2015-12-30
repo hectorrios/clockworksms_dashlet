@@ -16,8 +16,9 @@ The Dashlet is enabled for the **Accounts** and **Contacts** record views.
 Pre-requisite
 -------------
 
-In order to use the Dashlet you'll need to obtain a license key. You can register
-for a key for free and if you link a mobile number then you'll get a
+A [Clockwork](http://clockworksms.com "Clockwork") account
+
+You can register for a key for free and if you link a mobile number then you'll get a
 50 pence (UK currency) credit. Each SMS costs about 5 pence.
 
 
