@@ -2,7 +2,7 @@
 
 ## Clockwork SMS Dashlet
 
-A SMS sending Dashlet that can be used on the **record** views of the **Accounts** and 
+A SMS sending Dashlet for SugarCRM 7.6.* that can be used on the **record** views of the **Accounts** and 
 **Contacts** modules only.
 
 ## What is Clockwork SMS
