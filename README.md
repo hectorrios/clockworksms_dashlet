@@ -1,4 +1,4 @@
-# Clockwork SMS sender dashlet
+# Clockwork SMS sender dashlet for SugarCRM 7.6.*
 
 ## Clockwork SMS Dashlet
 
