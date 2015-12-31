@@ -1,17 +1,19 @@
-<!--<div class="record">-->
-        <!--{{#each dashletConfig.config.fields}}-->
-<!--<div class="row-fluid panel_body">-->
-<!--<div class="record-cell">-->
-<!--<div class="record-label">{{str label}}</div>-->
-<!--{{field ../this model=../this.settings template=../this.action}}-->
-<!--</div>-->
-<!--</div>-->
-        <!--{{/each}}-->
-<!--</div>-->
 
-<div>
-    <p>
-        There are currenly no configuration required except defining the API key in
-        the Administration page under the "ClockworkSMS Admin Options" section.
-    </p>
+<div class="well">
+    <h1>Clockwork SMS sender Dashlet</h1>
+    <p>There are currently no configuration required except defining the API key in
+        the Administration page under the "ClockworkSMS Admin Options" section.</p>
+    <p>Turning on debug mode allows for extra information to be shown in the browser
+    console for debugging purposes. Turning it on does not affect the functionality.</p>
+</div>
+
+<div class="record">
+    {{#each dashletConfig.config.fields}}
+        <div class="row-fluid panel_body">
+            <div class="record-cell">
+                <div class="record-label">{{str label}}</div>
+                {{field ../this model=../this.settings template=../this.action}}
+            </div>
+        </div>
+    {{/each}}
 </div>
