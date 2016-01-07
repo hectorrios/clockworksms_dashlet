@@ -73,6 +73,7 @@ Using the number as an example, the dashlet will recognize the following formats
 (+49) 123 456 7893
 +491234567893
 (+49)1234567893
+0049123 456 7893
 
 ## Ninja installation
 
