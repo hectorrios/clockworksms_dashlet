@@ -38,6 +38,29 @@ and you should see the release notes and a download link for __clockworksms.zip_
 
 Click the link and you should start the download of the installable package.
 
+## Using the Dashlet
+
+Once the installable package has been installed via Module Loader, you can configure 
+the SMS dashlet for the __Accounts__ and __Contacts__ modules. The dashlet will be
+visible in the detail views __only__.
+
+### The API key
+
+Before you can use the dashlet you'll need to configure a Clockwork API key that will
+be used instance wide. The key can be configured in the __Admin__ page and is located
+at the bottom of the page.
+
+### Using
+
+When the dashlet has been added then inside Account and Contact records the dashlet
+will detect all phone numbers in the record and make them available via a dropdown
+list. You can choose one of the numbers in the dropdown list or choose to use another 
+one.
+
+Add a message to be sent, an optional "From" name, and then click send.
+
+
+
 ## Ninja installation
 
 As with most things that are Ninja-like, this requires more steps and you'll
