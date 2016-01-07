@@ -59,7 +59,20 @@ one.
 
 Add a message to be sent, an optional "From" name, and then click send.
 
+### To Numbers
 
+The Dashlet will try and recognize a few different number formats. Ideally the format
+should be country code + number with no spaces and no special characters. For example, a
+valid number for a German mobile number might be:
+
+491234567893 (49 is the country code and the rest is the number).
+
+Using the number as an example, the dashlet will recognize the following formats:
+
++49 123 456 7893
+(+49) 123 456 7893
++491234567893
+(+49)1234567893
 
 ## Ninja installation
 

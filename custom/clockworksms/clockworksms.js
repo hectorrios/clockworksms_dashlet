@@ -335,6 +335,11 @@
 
         _validateSmsMessageObj: function () {
             var smsObj = this.smsMessageObj;
+
+            var numberRegEx =
+                /^[\s()+-]*([0-9][\s()+-]*){6,20}(?:[\-\.\ \\\/]?(?:#|ext\.?|extension|x)[\-\.\ \\\/]?(\d+))?$/i;
+
+
             //Make sure we at have a toNumber and a message
             if (!smsObj.toNumber || smsObj.toNumber === 'empty_val' ||
                 smsObj.toNumber.trim().length < 1) {
@@ -345,6 +350,32 @@
                 });
 
                 return false;
+            }
+
+            //Match the number via RegEx
+            if (!smsObj.toNumber.match(numberRegEx)) {
+                app.alert.show('to-number-invalid', {
+                    level: 'error',
+                    messages: 'The To Number is not formatted properly.',
+                    autoClose: false
+                });
+
+                return false;
+            } else {
+                /*
+                It matched. Strip off any leading "+", parenthesis,
+                and leading zeros
+                 */
+                var strippedNumber = this.__stripCharacters(smsObj.toNumber);
+                if (this.debugMode) {
+                    console.log('The value of the returned stripped num is: ',
+                        strippedNumber);
+                    console.log('The value of the SmsObj toNumber is: ',
+                        smsObj.toNumber);
+                }
+
+                //set the new value on the Sms object
+                smsObj.toNumber = strippedNumber;
             }
 
             if (!smsObj.message || smsObj.message.trim().length < 1) {
@@ -358,6 +389,24 @@
             }
 
             return true;
+        },
+
+        __stripCharacters: function (number) {
+
+            //Strip the parenthesis
+            number = number.replace(')', '');
+            number = number.replace(')', '');
+
+            //Strip any leading + symbols
+            number = number.replace(/^\+/, '');
+
+            //Strip any leading 00 digits
+            number = number.replace(/^(00)/, '');
+
+            //Strip all blanks
+            number = number.replace(/\s/g, '');
+
+            return number;
         }
 
     };
