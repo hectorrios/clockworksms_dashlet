@@ -62,10 +62,13 @@ Add a message to be sent, an optional "From" name, and then click send.
 ### To Numbers
 
 The Dashlet will try and recognize a few different number formats. Ideally the format
-should be country code + number with no spaces and no special characters. For example, a
-valid number for a German mobile number might be:
+should be 
 
-491234567893 (49 is the country code and the rest is the number).
+> country code + number with no spaces and no special characters. 
+
+For example, a valid number for a German mobile number might be:
+
+__491234567893__ (49 is the country code and the rest is the number).
 
 Using the number above as an example, the dashlet will recognize the following formats:
 
