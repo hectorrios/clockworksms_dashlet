@@ -67,13 +67,13 @@ valid number for a German mobile number might be:
 
 491234567893 (49 is the country code and the rest is the number).
 
-Using the number as an example, the dashlet will recognize the following formats:
+Using the number above as an example, the dashlet will recognize the following formats:
 
-+49 123 456 7893
-(+49) 123 456 7893
-+491234567893
-(+49)1234567893
-0049123 456 7893
+* +49 123 456 7893
+* (+49) 123 456 7893
+* +491234567893
+* (+49)1234567893
+* 0049123 456 7893
 
 ## Ninja installation
 
