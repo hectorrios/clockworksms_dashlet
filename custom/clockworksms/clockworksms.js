@@ -219,6 +219,12 @@
                             autoClose: false
                         });
                     } else { //It worked
+                        //alert the user
+                        app.alert.show('message-successful', {
+                            level: 'success',
+                            messages: 'Message sent.',
+                            autoClose: true
+                        });
                         clearFields(self);
                     }
 
