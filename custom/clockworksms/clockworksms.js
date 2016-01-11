@@ -394,7 +394,7 @@
         __stripCharacters: function (number) {
 
             //Strip the parenthesis
-            number = number.replace(')', '');
+            number = number.replace('(', '');
             number = number.replace(')', '');
 
             //Strip any leading + symbols
@@ -402,6 +402,9 @@
 
             //Strip any leading 00 digits
             number = number.replace(/^(00)/, '');
+
+            //Strip any dashes
+            number = number.replace(/\-/g, '');
 
             //Strip all blanks
             number = number.replace(/\s/g, '');
