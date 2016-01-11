@@ -78,9 +78,9 @@ Using the number above as an example, the dashlet will recognize the following f
 * (+49)1234567893
 * 0049123 456 7893
 
-## Ninja installation
+## Developer installation
 
-As with most things that are Ninja-like, this requires more steps and you'll
+As with most things that are Developer-like, this requires more steps and you'll
 need to install things like NodeJS and Grunt. If you're doing other development at the
 moment then you might already have these and so it becomes quite straight forward.
 
