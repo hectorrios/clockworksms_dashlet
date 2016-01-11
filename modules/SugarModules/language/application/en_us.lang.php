@@ -25,4 +25,5 @@ $app_strings['LBL_SMS_TO_TOOLTIP'] = 'Format should be 2 digit country code foll
 $app_strings['LBL_SMS_FROM_PLACEHOLDER'] = 'From Name';
 $app_strings['LBL_SMS_SEND_BUTTON'] = 'Send';
 $app_strings['LBL_SMS_MESSAGE_PLACEHOLDER'] = 'Enter Message here';
+$app_strings['LBL_SMS_CLEAR_BUTTON'] = 'Clear';
 

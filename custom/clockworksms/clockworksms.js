@@ -30,7 +30,8 @@
         events: {
             'click [data-action="send"]': 'sendSms',
             'click .phone-number' : 'useNumber',
-            'click #another-number': 'useAnotherNumber'
+            'click #another-number': 'useAnotherNumber',
+            'click [data-action="clear"]': 'clearSms'
         },
 
         /*
@@ -243,6 +244,11 @@
                 $('#clockworkDashlet').block({ message: '<h1>Sending...</h1>' });
             }
 
+        },
+
+        clearSms: function () {
+            //delegate to the private clearFields function
+            clearFields(this);
         },
 
         /**

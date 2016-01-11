@@ -30,7 +30,7 @@ $manifest = array (
     'name' => 'ClockworkSMS sender',
     'published_date' => '2015-12-11 08:00',
     'type' => 'module',
-    'version' => '0.1',
+    'version' => '0.3',
     'remove_tables' => false,
 );
 
