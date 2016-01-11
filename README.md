@@ -122,7 +122,7 @@ Once dev dependencies are installed issue a:
 
 > grunt build
 
-You should output similar to the following:
+You should see output similar to the following:
 
 > Running "zip:long-format" (zip) task
 >
@@ -130,7 +130,7 @@ You should output similar to the following:
 >
 > Done, without errors.
 
-If the ouput looks Ok then you should find a new folder called __build__ that
+If the output looks Ok then you should find a new folder called __build__ that
 has been created and inside the folder you'll find a zip file which is the installable
 package. You can use module loader to load and install the package.
 
