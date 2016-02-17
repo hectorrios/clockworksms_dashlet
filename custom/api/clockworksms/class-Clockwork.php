@@ -331,7 +331,7 @@ class Clockwork {
     $resp_doc->loadXML($resp_xml);
 
     // Parse the response to find credit value
-    $credit;
+    $credit = null;
     $err_no = null;
     $err_desc = null;
         
@@ -440,7 +440,7 @@ class Clockwork {
     $resp_doc->loadXML($resp_xml);
         
     // Parse the response to see if authenticated
-    $cust_id;
+    $cust_id = null;
     $err_no = null;
     $err_desc = null;
 
