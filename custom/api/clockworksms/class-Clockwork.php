@@ -533,36 +533,37 @@ class Clockwork {
       curl_close($ch);
 
       return $response;
-    } elseif (function_exists('stream_get_contents')) {
+    } //elseif (function_exists('stream_get_contents')) {
       // Enable error Track Errors
-      $track = ini_get('track_errors');
-      ini_set('track_errors',true);
-
-      $params = array('http' => array(
-      'method'  => 'POST',
-      'header'  => "Content-Type: text/xml\r\nUser-Agent: mediaburst PHP Wrapper/" . self::VERSION . "\r\n",
-      'content' => $data
-      ));
-
-      if (isset($this->proxy_host) && isset($this->proxy_port)) {
-        $params['http']['proxy'] = 'tcp://'.$this->proxy_host . ':' . $this->proxy_port;
-        $params['http']['request_fulluri'] = True;
-      }
-
-      $ctx = stream_context_create($params);
-      $fp = @fopen($url, 'rb', false, $ctx);
-      if (!$fp) {
-        ini_set('track_errors',$track);
-        throw new Exception("HTTP Error calling Clockwork API - fopen Error: $php_errormsg");
-      }
-      $response = @stream_get_contents($fp);
-      if ($response === false) {
-        ini_set('track_errors',$track);
-        throw new Exception("HTTP Error calling Clockwork API - stream Error: $php_errormsg");
-      }
-      ini_set('track_errors',$track);
-      return $response;
-    } else {
+//      $track = ini_get('track_errors');
+//      ini_set('track_errors',true);
+//
+//      $params = array('http' => array(
+//      'method'  => 'POST',
+//      'header'  => "Content-Type: text/xml\r\nUser-Agent: mediaburst PHP Wrapper/" . self::VERSION . "\r\n",
+//      'content' => $data
+//      ));
+//
+//      if (isset($this->proxy_host) && isset($this->proxy_port)) {
+//        $params['http']['proxy'] = 'tcp://'.$this->proxy_host . ':' . $this->proxy_port;
+//        $params['http']['request_fulluri'] = True;
+//      }
+//
+//      $ctx = stream_context_create($params);
+//      $fp = @fopen($url, 'rb', false, $ctx);
+//      if (!$fp) {
+//        ini_set('track_errors',$track);
+//        throw new Exception("HTTP Error calling Clockwork API - fopen Error: $php_errormsg");
+//      }
+//      $response = @stream_get_contents($fp);
+//      if ($response === false) {
+//        ini_set('track_errors',$track);
+//        throw new Exception("HTTP Error calling Clockwork API - stream Error: $php_errormsg");
+//      }
+//      ini_set('track_errors',$track);
+//      return $response;
+//    }
+    else {
       throw new Exception("Clockwork requires PHP5 with cURL or HTTP stream support");
     }
   }
