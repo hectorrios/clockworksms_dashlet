@@ -87,6 +87,11 @@ $installdefs = array (
             ),
 
             array (
+                'from' => '<basepath>/custom/api/clockworksms/PlivoSMSSender.php',
+                'to' => 'custom/clients/base/api/PlivoSMSSender.php',
+            ),
+
+            array (
                 'from' => '<basepath>/custom/Extension/modules/Administration',
                 'to' => 'custom/Extension/modules/Administration',
             ),

@@ -76,6 +76,18 @@ class ClockworkSMSSenderApi extends SugarApi {
         }
     }
 
+    public function send_plivo_sms($api, $args) {
+
+        $sms_body =  $args['message'];
+        $from_name = isset($args['from_name']) ? $args['from_name'] : 'SugarCRM';
+
+        $smsSender = new PlivoSMSSender();
+
+        $result = $smsSender->sendSMSMessage($sms_body, $from_name, $args['to_number']);
+
+        return $result;
+    }
+
     public function store_api_key($api, $args) {
         if (!isset($args['api_key'])) {
             return array(
