@@ -9,5 +9,14 @@
   ],
   "require": {
     "plivo/plivo-php": "v1.1.5"
+  },
+
+  "autoload" : {
+    "psr-4" : {
+      "Sugarcrm\\Sugarcrm\\custom\\": [
+        "custom/src/",
+        "custom/"
+      ]
+    }
   }
 }
