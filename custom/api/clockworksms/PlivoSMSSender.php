@@ -1,5 +1,7 @@
 <?php
-require 'vendor/autoload.php';
+
+namespace Sugarcrm\Sugarcrm\custom\api\clockworksms;
+
 use Plivo\RestAPI;
 
 /**

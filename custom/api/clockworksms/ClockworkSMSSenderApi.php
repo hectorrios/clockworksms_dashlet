@@ -1,5 +1,7 @@
 <?php
 
+use Sugarcrm\Sugarcrm\custom\api\clockworksms\PlivoSMSSender;
+
 require_once 'custom/clients/base/api/class-Clockwork.php';
 require_once 'modules/Configurator/Configurator.php';
 
